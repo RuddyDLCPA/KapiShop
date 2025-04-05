@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KapiShop - Marketplace B2C</title>
+        <!-- Favicon (icono de la pestaña) -->
+        <link rel="icon" href="favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        
+        <!-- Para mejor compatibilidad con distintos dispositivos -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+    
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3D5AFE;
+            --primary-dark: #0031CA;
+            --primary-light: #8187FF;
+            --secondary: #FF3D00;
+            --dark: #263238;
+            --light: #ECEFF1;
+            --gray: #607D8B;
+            --success: #00C853;
+            --warning: #FFAB00;
+            --danger: #FF1744;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-links a {
+            color: white;
+            margin-left: 15px;
+        }
+        
+        .main-header {
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-actions a {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .user-actions i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .cart-count {
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links li a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Hero Banner */
+        .hero {
+            height: 400px;
+            background-color: var(--light);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero-content {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Categorías */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .categories {
+            padding: 40px 0;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-img {
+            height: 150px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .category-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .category-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Productos destacados */
+        .featured {
+            padding: 40px 0;
+            background-color: white;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .product-price .old-price {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+        
+        .product-rating {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-secondary {
+            background-color: var(--gray);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #546E7A;
+        }
+        
+        /* Ofertas */
+        .offers {
+            padding: 40px 0;
+            background-color: var(--light);
+        }
+        
+        .offer-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .offer-slide {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            color: white;
+            position: relative;
+        }
+        
+        .offer-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+        }
+        
+        .offer-content {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+        }
+        
+        .offer-content h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .offer-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Marcas */
+        .brands {
+            padding: 40px 0;
+            background-color: white;
+        }
+        
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .brand-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .brand-item img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .brand-item:hover img {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 60px 0;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            padding: 12px 25px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #E53935;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #B0BEC5;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #37474F;
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #37474F;
+            padding-top: 20px;
+            text-align: center;
+            color: #B0BEC5;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .category-grid,
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .brand-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .search-bar {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .user-actions a {
+                margin-left: 0;
+            }
+            
+            .category-grid,
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .offer-slide {
+                padding: 0 20px;
+                text-align: center;
+            }
+            
+            .offer-content {
+                max-width: 100%;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 25px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .category-grid,
+            .product-grid,
+            .brand-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="welcome-msg">¡Bienvenido a KapiShop! Envíos gratis en compras mayores a $50</div>
+            <div class="top-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Localizador de tiendas</a>
+                <a href="#"><i class="fas fa-globe"></i> Español</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Header -->
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="#" class="logo" onclick="showHomePage()">Kapi<span>Shop</span></a>
+                    
+                    <div class="search-bar">
+                        <input type="text" placeholder="Buscar productos, marcas y más...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <div class="user-actions">
+                        <a href="#">
+                            <i class="fas fa-user"></i>
+                            <span>Mi cuenta</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-store"></i>
+                            <span>Vender</span>
+                        </a>
+                        <a href="#" style="position: relative;" onclick="showCartPage()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Carrito</span>
+                            <span class="cart-count">2</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showHomePage()"><i class="fas fa-bars"></i> Categorías</a></li>
+                    <li><a href="#" onclick="showHomePage()">Ofertas</a></li>
+                    <li><a href="#" onclick="showHomePage()">Historial</a></li>
+                    <li><a href="#" onclick="showHomePage()">Supermercado</a></li>
+                    <li><a href="#" onclick="showHomePage()">Moda</a></li>
+                    <li><a href="#" onclick="showHomePage()">Electrónicos</a></li>
+                    <li><a href="#" onclick="showHomePage()">Hogar</a></li>
+                    <li><a href="#" onclick="showHomePage()">Deportes</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Página Principal (Home) -->
+    <div id="home-page">
+        <!-- Hero Banner -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Las mejores ofertas solo en KapiShop</h1>
+                <p>Descubre productos exclusivos con envío rápido y seguro</p>
+                <div>
+                    <a href="#" class="btn">Comprar ahora</a>
+                    <a href="#" class="btn btn-outline">Ver ofertas</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Categories -->
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">Categorías destacadas</h2>
+                <div class="category-grid">
+                    <!-- Categoría Electrónicos -->
+                    <div class="category-card" onclick="showProductPage()">
+                        <div class="category-img">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=80" alt="Electrónicos">
+                        </div>
+                        <div class="category-info">
+                            <h3>Electrónicos</h3>
+                            <a href="#">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Categoría Moda -->
+                    <div class="category-card" onclick="showProductPage()">
+                        <div class="category-img">
+                            <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=80" alt="Moda">
+                        </div>
+                        <div class="category-info">
+                            <h3>Moda</h3>
+                            <a href="#">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Categoría Hogar -->
+                    <div class="category-card" onclick="showProductPage()">
+                        <div class="category-img">
+                            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=80" alt="Hogar">
+                        </div>
+                        <div class="category-info">
+                            <h3>Hogar</h3>
+                            <a href="#">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Categoría Deportes -->
+                    <div class="category-card" onclick="showProductPage()">
+                        <div class="category-img">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=80" alt="Deportes">
+                        </div>
+                        <div class="category-info">
+                            <h3>Deportes</h3>
+                            <a href="#">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Productos destacados -->
+        <section class="featured">
+            <div class="container">
+                <h2 class="section-title">Productos populares</h2>
+                <div class="product-grid">
+                    <!-- Producto 1 -->
+                    <div class="product-card" onclick="showProductPage()">
+                        <span class="product-badge">-20%</span>
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Smartphone">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone X200 con cámara de 48MP</h3>
+                            <div class="product-price">$299.99 <span class="old-price">$349.99</span></div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (124)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 2 -->
+                    <div class="product-card" onclick="showProductPage()">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Zapatillas">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Zapatillas deportivas UltraComfort</h3>
+                            <div class="product-price">$59.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> (87)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 3 -->
+                    <div class="product-card" onclick="showProductPage()">
+                        <span class="product-badge">Nuevo</span>
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1571415060716-baff5f717c37?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Smart TV">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Smart TV LED 4K UHD 55"</h3>
+                            <div class="product-price">$499.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> (56)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 4 -->
+                    <div class="product-card" onclick="showProductPage()">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1583778176476-4a8b02a64c01?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Sartenes">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Juego de sartenes antiadherentes</h3>
+                            <div class="product-price">$89.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (214)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Página de Producto -->
+    <div id="product-page" class="product-page">
+        <section class="product-details">
+            <div class="container">
+                <div class="product-container">
+                    <div class="product-gallery">
+                        <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=600&q=80" alt="Smartphone X200" class="main-image" id="main-image">
+                        <div class="thumbnail-container">
+                            <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Vista frontal" class="thumbnail active" onclick="changeMainImage(this)">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b893731aff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Vista trasera" class="thumbnail" onclick="changeMainImage(this)">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b893731aff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Vista lateral" class="thumbnail" onclick="changeMainImage(this)">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b893731aff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Accesorios" class="thumbnail" onclick="changeMainImage(this)">
+                        </div>
+                    </div>
+                    
+                    <div class="product-info">
+                        <h1 class="product-title">Smartphone X200 con cámara de 48MP</h1>
+                        <div class="product-price">$299.99 <span class="old-price">$349.99</span></div>
+                        <div class="product-rating">
+                            <span class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </span>
+                            <span>124 opiniones</span>
+                            <span class="shipping-badge">Envío gratis</span>
+                        </div>
+                        
+                        <div class="product-actions">
+                            <button class="btn btn-lg"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
+                            <button class="btn btn-lg" style="background-color: var(--secondary);">Comprar ahora</button>
+                        </div>
+                        
+                        <div class="product-details">
+                            <div class="details-tabs">
+                                <div class="tab active" onclick="changeTab(this, 'description')">Descripción</div>
+                                <div class="tab" onclick="changeTab(this, 'specs')">Especificaciones</div>
+                                <div class="tab" onclick="changeTab(this, 'reviews')">Opiniones</div>
+                            </div>
+                            
+                            <div class="tab-content active" id="description">
+                                <p>El Smartphone X200 es la última innovación en tecnología móvil. Con una pantalla AMOLED de 6.5 pulgadas, procesador Octa-Core y 128GB de almacenamiento, este dispositivo ofrece un rendimiento excepcional.</p>
+                                <p>Su cámara principal de 48MP captura fotos impresionantes con gran detalle, incluso en condiciones de poca luz. La batería de 4000mAh garantiza una duración prolongada, y el diseño delgado y elegante lo convierte en un dispositivo cómodo de usar.</p>
+                            </div>
+                            
+                            <div class="tab-content" id="specs">
+                                <table>
+                                    <tr>
+                                        <td><strong>Pantalla:</strong></td>
+                                        <td>6.5" AMOLED, 1080x2400</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Procesador:</strong></td>
+                                        <td>Octa-Core 2.2GHz</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Memoria:</strong></td>
+                                        <td>6GB RAM, 128GB almacenamiento</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cámara:</strong></td>
+                                        <td>48MP + 8MP + 5MP, frontal 20MP</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Batería:</strong></td>
+                                        <td>4000mAh, carga rápida</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sistema:</strong></td>
+                                        <td>Android 12</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="tab-content" id="reviews">
+                                <div class="review">
+                                    <div class="review-author">Juan Pérez</div>
+                                    <div class="review-date">15 de marzo, 2023</div>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p>Excelente teléfono, la cámara toma fotos increíbles y la batería dura todo el día. Muy recomendado.</p>
+                                </div>
+                                
+                                <div class="review">
+                                    <div class="review-author">María González</div>
+                                    <div class="review-date">2 de marzo, 2023</div>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <p>Buen teléfono en general, aunque el lector de huellas podría ser más rápido.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="related-products">
+                    <h2 class="section-title">Productos relacionados</h2>
+                    <div class="product-grid">
+                        <div class="product-card" onclick="showProductPage()">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1598327105666-5b893731aff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Smartphone X100">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Smartphone X100</h3>
+                                <div class="product-price">$249.99</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> (92)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" onclick="showProductPage()">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Smartphone X200 Pro">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Smartphone X200 Pro</h3>
+                                <div class="product-price">$399.99</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (156)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card" onclick="showProductPage()">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1598327105666-5b893731aff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=300&q=80" alt="Funda protectora">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Funda protectora para X200</h3>
+                                <div class="product-price">$19.99</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> (210)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Página del Carrito -->
+    <div id="cart-page" class="cart-page">
+        <section class="cart-details">
+            <div class="container">
+                <div class="cart-container">
+                    <h2 class="section-title">Tu carrito de compras</h2>
+                    
+                    <table class="cart-items">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center;">
+                                        <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&h=80&q=80" alt="Smartphone X200" class="cart-item-img">
+                                        <div style="margin-left: 15px;">
+                                            <div class="cart-item-title">Smartphone X200</div>
+                                            <div style="color: var(--gray); font-size: 0.9rem;">Color: Negro</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>$299.99</td>
+                                <td>
+                                    <div class="quantity-selector">
+                                        <button class="quantity-btn">-</button>
+                                        <input type="number" value="1" min="1" class="quantity-input">
+                                        <button class="quantity-btn">+</button>
+                                    </div>
+                                </td>
+                                <td>$299.99</td>
+                                <td><i class="fas fa-times remove-item"></i></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center;">
+                                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&h=80&q=80" alt="Zapatillas" class="cart-item-img">
+                                        <div style="margin-left: 15px;">
+                                            <div class="cart-item-title">Zapatillas deportivas</div>
+                                            <div style="color: var(--gray); font-size: 0.9rem;">Talla: 42</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>$59.99</td>
+                                <td>
+                                    <div class="quantity-selector">
+                                        <button class="quantity-btn">-</button>
+                                        <input type="number" value="2" min="1" class="quantity-input">
+                                        <button class="quantity-btn">+</button>
+                                    </div>
+                                </td>
+                                <td>$119.98</td>
+                                <td><i class="fas fa-times remove-item"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="cart-summary">
+                        <table class="summary-table">
+                            <tr>
+                                <td>Subtotal:</td>
+                                <td>$419.97</td>
+                            </tr>
+                            <tr>
+                                <td>Envío:</td>
+                                <td>$0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Total:</td>
+                                <td>$419.97</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="cart-actions">
+                        <button class="btn" onclick="showHomePage()"><i class="fas fa-arrow-left"></i> Continuar comprando</button>
+                        <button class="btn" style="background-color: var(--success);">Proceder al pago <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KapiShop</h3>
+                    <p>Tu marketplace confiable con los mejores productos y vendedores verificados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Comprar</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Productos destacados</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Nuevos productos</a></li>
+                        <li><a href="#">Marcas</a></li>
+                        <li><a href="#">Tiendas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ayuda</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Centro de ayuda</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Estado del pedido</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope"></i> info@kapishop.com</li>
+                        <li><i class="fas fa-clock"></i> Lunes a Viernes: 9am - 6pm</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 KapiShop. Todos los derechos reservados. | <a href="#">Términos y condiciones</a> | <a href="#">Política de privacidad</a></p>
+            </div>
+        </div>
+    </footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KapiShop</h3>
+                    <p>Tu marketplace confiable con los mejores productos y vendedores verificados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><
+
+                            <script>
+                                // Funciones para cambiar entre páginas
+                                function showHomePage() {
+                                    document.getElementById('home-page').style.display = 'block';
+                                    document.getElementById('product-page').style.display = 'none';
+                                    document.getElementById('cart-page').style.display = 'none';
+                                    window.scrollTo(0, 0);
+                                }
+                                
+                                function showProductPage() {
+                                    document.getElementById('home-page').style.display = 'none';
+                                    document.getElementById('product-page').style.display = 'block';
+                                    document.getElementById('cart-page').style.display = 'none';
+                                    window.scrollTo(0, 0);
+                                }
+                                
+                                function showCartPage() {
+                                    document.getElementById('home-page').style.display = 'none';
+                                    document.getElementById('product-page').style.display = 'none';
+                                    document.getElementById('cart-page').style.display = 'block';
+                                    window.scrollTo(0, 0);
+                                }
+                                
+                                // Función para cambiar la imagen principal al hacer clic en una miniatura
+                                function changeMainImage(thumbnail) {
+                                    // Remover clase active de todas las miniaturas
+                                    document.querySelectorAll('.thumbnail').forEach(function(item) {
+                                        item.classList.remove('active');
+                                    });
+                                    
+                                    // Añadir clase active a la miniatura clickeada
+                                    thumbnail.classList.add('active');
+                                    
+                                    // Cambiar la imagen principal
+                                    const mainImage = document.getElementById('main-image');
+                                    mainImage.src = thumbnail.src.replace('150x150', '600x600');
+                                }
+                                
+                                // Función para cambiar entre pestañas
+                                function changeTab(tabElement, tabId) {
+                                    // Remover clase active de todas las pestañas y contenidos
+                                    document.querySelectorAll('.tab').forEach(function(item) {
+                                        item.classList.remove('active');
+                                    });
+                                    document.querySelectorAll('.tab-content').forEach(function(item) {
+                                        item.classList.remove('active');
+                                    });
+                                    
+                                    // Añadir clase active a la pestaña clickeada y su contenido
+                                    tabElement.classList.add('active');
+                                    document.getElementById(tabId).classList.add('active');
+                                }
+                                
+                                // Funcionalidad para los botones de cantidad en el carrito
+                                document.querySelectorAll('.quantity-btn').forEach(function(button) {
+                                    button.addEventListener('click', function() {
+                                        const input = this.parentElement.querySelector('.quantity-input');
+                                        let value = parseInt(input.value);
+                                        
+                                        if (this.textContent === '+' && value < 10) {
+                                            input.value = value + 1;
+                                        } else if (this.textContent === '-' && value > 1) {
+                                            input.value = value - 1;
+                                        }
+                                        
+                                        // Aquí podrías actualizar el total del producto
+                                    });
+                                });
+                                
+                                // Funcionalidad para eliminar items del carrito
+                                document.querySelectorAll('.remove-item').forEach(function(icon) {
+                                    icon.addEventListener('click', function() {
+                                        this.closest('tr').remove();
+                                        // Aquí podrías actualizar el resumen del carrito
+                                    });
+                                });
+                                
+                                // Mostrar la página de inicio por defecto
+                                showHomePage();
+                            </script>
